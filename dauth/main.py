@@ -317,7 +317,7 @@ def device_auth_token(version):
 	iat = int(time.time())
 	payload = {
 		"sub": info["did"],
-		"iss": os.environ["DAUTH_DOMAIN"],
+		"iss": os.environ["DAUTH_ISS"],
 		"aud": client_id,
 		"exp": iat + 86400,
 		"iat": iat,

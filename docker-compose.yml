@@ -31,7 +31,7 @@ services:
       - ./common:/app/common:ro
       - ./instance:/app/instance:ro
     environment:
-      - DAUTH_DOMAIN=${DAUTH_DOMAIN}
+      - DAUTH_ISS=${DAUTH_ISS}
       - DAUTH_JKU=${DAUTH_JKU}
       - CHALLENGE_KEY=${CHALLENGE_KEY}
       - CERTIFICATE_KEY=${CERTIFICATE_KEY}
