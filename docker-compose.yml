@@ -1,0 +1,47 @@
+
+version: "3"
+services:
+  job:
+    build: job
+    restart: always
+    volumes:
+      - ./instance:/app/instance
+  
+  dadmin:
+    build: dadmin
+    restart: always
+    ports:
+      - 127.0.0.1:${DADMIN_PORT}:8000
+    volumes:
+      - ./common:/app/common:ro
+      - ./instance:/app/instance
+    environment:
+      - USERNAME=${DADMIN_USERNAME}
+      - PASSWORD=${DADMIN_PASSWORD}
+      - SECRET_KEY=${DADMIN_SECRET_KEY}
+      - CERTIFICATE_KEY=${CERTIFICATE_KEY}
+      - DEVICE_TYPE=${DEVICE_TYPE}
+  
+  dauth:
+    build: dauth
+    restart: always
+    ports:
+      - 127.0.0.1:${DAUTH_PORT}:8000
+    volumes:
+      - ./common:/app/common:ro
+      - ./instance:/app/instance:ro
+    environment:
+      - DAUTH_DOMAIN=${DAUTH_DOMAIN}
+      - DAUTH_JKU=${DAUTH_JKU}
+      - CHALLENGE_KEY=${CHALLENGE_KEY}
+      - CERTIFICATE_KEY=${CERTIFICATE_KEY}
+      - DEVICE_TYPE=${DEVICE_TYPE}
+
+  dcert:
+    image: nginx:latest
+    restart: always
+    ports:
+      - 127.0.0.1:${DCERT_PORT}:80
+    volumes:
+      - ./instance/public:/app/instance:ro
+      - ./dcert/nginx.conf:/etc/nginx/nginx.conf

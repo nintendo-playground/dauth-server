@@ -1,0 +1,17 @@
+
+<!doctype html>
+<html>
+	<body style="margin: 50px">
+		<h1>
+			<a style="text-decoration: none; color: black" href="/admin">DAuth dashboard</a>
+		</h1>
+		
+		<form method="post" style="font-family: monospace" enctype="multipart/form-data">
+			Number of certificates: <input type="number" name="count" min="0" max="1000"><br>
+			Device type: <input type="text" name="dt" placeholder="NX Prod 1"><br>
+			CA certificate: <input type="file" name="ca"><br>
+			CA private key: <input type="file" name="cakey"><br>
+			<input type="submit" value="Generate">
+		</form>
+	</body>
+</html>
