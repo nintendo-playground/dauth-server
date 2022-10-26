@@ -1,5 +1,7 @@
 This is the source code for the device authentication server, including an admin panel. Documentation is available [here](https://github.com/kinnay/nintendoclients/wiki/DAuth-Server).
 
+Before building the service, you must place `prod.keys` and `dev.keys` into `dauth/resources` (create this folder if it does not exist). These can be dumped with [Lockpick_RCM](https://github.com/shchmue/Lockpick_RCM).
+
 Example configuration for localhost:
 ```
 COMPOSE_PROJECT_NAME: 
