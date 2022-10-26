@@ -3,7 +3,7 @@ import secrets
 
 env = {
 	"COMPOSE_PROJECT_NAME": input("Project name: "),
-	"DAUTH_DOMAIN": input("Domain (dauth): "),
+	"DAUTH_ISS": input("Issuer (dauth): "),
 	"DAUTH_JKU": input("JKU (dauth): "),
 	"DAUTH_PORT": input("Port (dauth): "),
 	"DCERT_PORT": input("Port (dcert): "),
