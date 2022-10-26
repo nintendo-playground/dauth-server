@@ -26,11 +26,15 @@ def generate_serial_number(id):
 	checksum = (10 - sum(odd) - sum(even) * 3) % 10
 	return sn + str(checksum)
 
-def generate_device_id(id):
+def generate_device_id():
 	# There are lots of weird patterns in the device id, but I have no
-	# idea how it is generated. It doesn't matter anyway, so we use
-	# a simple custom algorithm here.
-	return "6265" + secrets.token_hex(3) + "%08x" %id
+	# idea how it is generated. We generate the device id randomly here,
+	# and hope that we don't get any collisions.
+	did = "6265" + secrets.token_hex(4)
+	did += random.choice(["0", "1", "e", "f"])
+	did += random.choice(["0", "2", "4", "6", "8", "a", "c", "e"])
+	did += "%02x" %(random.randint(0, 24))
+	return did
 
 def allocate_devices(count):
 	data = {"next_id": 1}
@@ -45,7 +49,7 @@ def allocate_devices(count):
 	
 	devices = []
 	for i in range(count):
-		did = generate_device_id(next_id + i)
+		did = generate_device_id()
 		sn = generate_serial_number(next_id + i)
 		devices.append((did, sn))
 	
